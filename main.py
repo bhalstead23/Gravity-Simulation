@@ -44,12 +44,12 @@ def gForce(x1,y1,m1,x2,y2,m2):
 def physics(fX,fY,m,vX,vY,pX,pY,t):
     aX=fX/m
     aY=fY/m
-    return [0.5*aX*t**2+vX*t+pX,0.5*aY*t**2+vY*t+pY,aX*t+vX,aY*t+vY]
+    return [0.5*aX*t**2+vX*t+pX, 0.5*aY*t**2+vY*t+pY, aX*t+vX, aY*t+vY]
 
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
+INDIGO = (75, 0, 130)
 RED = (255, 0, 0)
 pygame.init()
 
