@@ -13,25 +13,29 @@ class planet:
         self.velY=velY
         self.mass=mass
 
-planet1=planet(220,330,0,0,10000000)
-planet2=planet(500,400,0,0,10000000)
+planet1=planet(220,330,0,0,1000000000)
+planet2=planet(500,400,0,0,100000000000)
 # planet3=planet(1,2,0,0,50)
 
 crashed=False
 
 def gForce(x1,y1,m1,x2,y2,m2):
 
-    if (x1-x2)<0:
+    if (x2-x1)<0:
         coefX=-1
     else:
         coefX=1
-    if (y1-y2)<0:
+    if (y2-y1)<0:
         coefY=-1
     else:
         coefY=1
+
+    r=sqrt((x1-x2)**2 + (y1-y2)**2)
+    f=G*m1*m2/r**2
+    dF=(y1-y2)/(x1-x2)
     fX=(1-dF)*f*coefX
     fY=dF*f*coefY
-    r=sqrt((x1-x2)**2 + (y1-y2)**2)
+
     if r<10:
         return 42
     else:
@@ -50,7 +54,7 @@ RED = (255, 0, 0)
 pygame.init()
 
 # Set the width and height of the screen [width, height]
-size = [1000, 700]
+size = [1200, 900]
 screen = pygame.display.set_mode(size, pygame.RESIZABLE)
 
 pygame.display.set_caption("Gravity Simulation")
@@ -69,24 +73,23 @@ while not done:
         if event.type == pygame.QUIT:
             done=True
 
-    force=gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)
+    force=gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[0]
     if force==42:
         break
 
-    direc1=gForceDirec(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)
-    direc2=gForceDirec(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)
-    planet1.posX=physics(gForce[1],,planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[0]
-    planet1.posY=physics(force,direc1,planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[1]
-    planet1.velX=physics(force,direc1,planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[2]
-    planet1.velY=physics(force,direc1,planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[3]
+    planet1.posX=physics(gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[1],gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[2],planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[0]
+    planet1.posY=physics(gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[1],gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[2],planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[1]
+    planet1.velX=physics(gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[1],gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[2],planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[2]
+    planet1.velY=physics(gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[1],gForce(planet1.posX,planet1.posY,planet1.mass,planet2.posX,planet2.posY,planet2.mass)[2],planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[3]
 
-
-    planet2.posX=physics(force,direc2,planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[0]
-    planet2.posY=physics(force,direc2,planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[1]
-    planet2.velX=physics(force,direc2,planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[2]
-    planet2.velY=physics(force,direc2,planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[3]
-    print(planet1.posX, planet1.posY, planet1.velX, planet1.velY)
-
+    planet2.posX=physics(gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[1],gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[2],planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[0]
+    planet2.posY=physics(gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[1],gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[2],planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[1]
+    planet2.velX=physics(gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[1],gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[2],planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[2]
+    planet2.velY=physics(gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[1],gForce(planet2.posX,planet2.posY,planet2.mass,planet1.posX,planet1.posY,planet1.mass)[2],planet2.mass,planet2.velX,planet2.velY,planet2.posX,planet2.posY,sec)[3]
+    print(planet1.posX)
+    print(planet1.posY)
+    print(planet2.posX)
+    print(planet2.posY)
     sec=sec+1
 
 
