@@ -6,7 +6,11 @@ from pygame import draw
 G=6.67*10**-11
 
 class planet:
+<<<<<<< HEAD
     def __init__(self,posX,posY,posZ,velX,velY,velZ,mass):
+=======
+    def __init__(self,posX,posY,posZ,velX,velY,mass):
+>>>>>>> 374891b25d94a1c517c44d2a35cd180d3b175806
         self.posX=posX
         self.posY=posY
         self.posZ=posZ
@@ -15,9 +19,15 @@ class planet:
         self.velZ=velZ
         self.mass=mass
 
+<<<<<<< HEAD
 planet1=planet(220,330,100,0,0,0,1000000000)
 planet2=planet(500,400,200,0,0,0,100000000000)
 planet3=planet(100,200,50,0,0,0,100000000)
+=======
+planet1=planet(220,330,0,0,1000000000)
+planet2=planet(500,400,0,0,100000000000)
+planet3=planet(100,200,0,0,100000000)
+>>>>>>> 374891b25d94a1c517c44d2a35cd180d3b175806
 
 crashed=False
 
@@ -92,11 +102,19 @@ while not done:
 
 
     _1on2 = gForce(planet1.posX,planet1.posY,planet1.posZ,planet1.mass,planet2.posX,planet2.posY,planet2.posZ,planet2.mass)
+<<<<<<< HEAD
     _1on3 = gForce(planet1.posX,planet1.posY,planet1.posZ,planet1.mass,planet2.posX,planet2.posY,planet2.posZ,planet2.mass)
     _2on1 = gForce(planet2.posX,planet2.posY,planet1.posZ,planet1.mass,planet2.posX,planet2.posY,planet2.posZ,planet2.mass)
     _2on3 = gForce(planet2.posX,planet2.posY,planet2.posZ,planet1.mass,planet2.posX,planet2.posY,planet2.posZ,planet2.mass)
     _3on1 = gForce(planet3.posX,planet3.posY,planet3.posZ,planet1.mass,planet2.posX,planet2.posY,planet2.posZ,planet2.mass)
     _3on2 = gForce(planet3.posX,planet3.posY,planet3.posZ,planet1.mass,planet2.posX,planet2.posY,planet2.posZ,planet2.mass)
+=======
+    _1on3 = gForce(planet1.posX,planet1.posY,planet1.posZ,planet1.mass,planet3.posX,planet3.posY,planet3.posZ,planet3.mass)
+    _2on1 = gForce(planet2.posX,planet2.posY,planet2.posZ,planet2.mass,planet1.posX,planet1.posY,planet1.posZ,planet1.mass)
+    _2on3 = gForce(planet2.posX,planet2.posY,planet2.posZ,planet2.mass,planet3.posX,planet3.posY,planet3.posZ,planet3.mass)
+    _3on1 = gForce(planet3.posX,planet3.posY,planet3.posZ,planet3.mass,planet1.posX,planet1.posY,planet1.posZ,planet1.mass)
+    _3on2 = gForce(planet3.posX,planet3.posY,planet3.posZ,planet3.mass,planet2.posX,planet2.posY,planet3.posZ,planet2.mass)
+>>>>>>> 374891b25d94a1c517c44d2a35cd180d3b175806
 
     planet1.posX = physics(_1on2[1],_1on2[2],planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[0]
     planet1.posY = physics(_1on2[1],_1on2[2],planet1.mass,planet1.velX,planet1.velY,planet1.posX,planet1.posY,sec)[1]
